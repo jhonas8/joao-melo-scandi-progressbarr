@@ -1,0 +1,107 @@
+:root {
+    --item-circle-radius: 45px;
+    --unselected-label-color: #ADADAD;
+    --unselected-circle-index-color: #9C9C9C;
+    --gap: 200px;
+}
+
+.stepItem {
+    position: relative;
+    height: 100%;
+    width: var(--item-circle-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    cursor: pointer;
+}
+  
+.stepItem:not(:first-child)::before {
+    position: absolute;
+    content: "";
+    border-bottom: 5px solid transparent;
+    border-radius: 40px;
+    width: calc(var(--gap) - 30px);
+    bottom: calc(50px + 7px);
+    right: calc(var(--item-circle-radius) + 15px);
+    z-index: 2;
+}
+
+.stepItem:not(:last-child)::after {
+    position: absolute;
+    content: "";
+    border-bottom: 5px solid var(--unselected-circle-index-color);
+    border-radius: 40px;
+    width: calc(var(--gap) - 30px);
+    bottom: calc(50px + 7px);
+    left: calc(var(--item-circle-radius) + 15px);
+    z-index: 1;
+}
+
+.stepItem.activeStep:not(:first-child)::before {
+    border-bottom: 5px solid var(--page-color);
+    width: calc(var(--gap) - 30px);
+    animation: lineColerBetween .34s forwards ease-in;
+}
+
+.stepItem > .stepCircle {
+    width: var(--item-circle-radius);
+    height: var(--item-circle-radius);
+    border: 2px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--unselected-circle-index-color);
+    background-color: var(--unselected-color);
+    margin-bottom: 10px;
+}
+
+.stepItem > .stepLabel {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: var(--unselected-label-color);
+}
+
+.activeStep .stepCircle {
+    background-color: var(--page-color);
+    color: rgb(255,255,255);
+
+    animation: circleColor 0.15s forwards ease-out;
+}
+
+.stepItem.activeStep > .stepLabel {
+    color: rgb(0,0,0);
+}
+
+@keyframes circleColor {
+    from {
+        color: var(--unselected-circle-index-color);
+        background-color: var(--unselected-color);
+    }
+
+    to {
+        background-color: var(--page-color);
+        color: rgb(255,255,255);
+    }
+}
+
+@keyframes lineColerBetween {
+    0% {
+        border-bottom: 5px solid var(--unselected-color);
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    
+    70% {
+        transform: translateX(0);
+        opacity: .2;
+    }
+
+    to{
+        border-bottom: 5px solid var(--page-color);
+        opacity: 1;
+    }
+}

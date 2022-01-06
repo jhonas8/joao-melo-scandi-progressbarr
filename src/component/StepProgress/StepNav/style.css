@@ -1,0 +1,9 @@
+.stepWrapper {
+    height: 100%;
+    width: auto;
+    display: flex;
+    gap: var(--gap);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
